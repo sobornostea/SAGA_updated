@@ -1,10 +1,16 @@
-# Statistically Acceptable GAussians (SAGA)
+# Statistically Acceptable GAussians (SAGA) (modification of the original SAGA)
 
 ![Joke-Logo](images/saga.png)
 
 Authored by James Howe, Thomas Prest, Thomas Ricosset, and Mélissa Rossi - 27-Jan-2020
 
 Code from the paper available at: https://eprint.iacr.org/2019/1411
+
+Updated by Bachir Lachguel - 2025-08-08
+
+It moves the code to the latest python version, and corrects a slight mistake in how the chisquare test is done (see this issue : https://github.com/scipy/scipy/issues/12282)
+
+The discrepancy between expected and observed frequencies was very small, so this did not pose a threat to the correctness of our test. But it is good practice to properly fix the error by scaling the expected values vector.
 
 ## Introduction
 
@@ -17,6 +23,13 @@ This standalone implementation should be able to run on most machines. We have p
 ## How to use
 
 Along with the main file to run these statistical tests, `saga.py`, we also provide code for our proposed sampler [1] in the files `sampler.c`, `sampler.py`, where `sampler_rep.py` is a file we use to get data on the repetition rate. We also provide [falcon/](code/falcon) and [testdata/](code/testdata) for python implementations of [Falcon](https://falcon-sign.info/) and its output values.
+
+To run some tests on the Falcon data, open a Python shell and run:
+
+```py
+import saga
+saga.test_falcon()
+```
 
 #### Example for univariate samples
 

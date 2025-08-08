@@ -195,6 +195,11 @@ class UnivariateSamples:
         exp = [round(prob * self.nsamples) for prob in exp]
         diff = self.nsamples - sum(exp_histogram.values())
         exp_histogram[int(round(self.exp_mu))] += diff
+        # Added in reaction to this scipy change : https://github.com/scipy/scipy/issues/12282#issuecomment-2278421287
+        s_exp = sum(exp)
+        s_obs = sum(obs)
+        for i in range(len(exp)):
+            exp[i] = exp[i] * (s_obs/s_exp)
         res = chisquare(obs, f_exp=exp)
         return res
 
